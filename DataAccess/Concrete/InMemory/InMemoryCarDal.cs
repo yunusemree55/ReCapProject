@@ -3,6 +3,7 @@ using Entities.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 
 namespace DataAccess.Concrete.InMemory
@@ -16,26 +17,31 @@ namespace DataAccess.Concrete.InMemory
             //Database'deki veriler
             _cars = new List<Car>
             {
-                new Car{CarId = 1, CarBrandId = 4 , CarColorId = 3,CarModelYear =2000,DailyPrice = 500 ,CarDescription= "Ford Focus"},
-                new Car{CarId = 2, CarBrandId = 4 , CarColorId = 5,CarModelYear =2003,DailyPrice = 850 ,CarDescription= "Ford Fiesta"},
-                new Car{CarId = 3, CarBrandId = 2 , CarColorId = 7,CarModelYear =2002,DailyPrice = 730 ,CarDescription= "Toyota Corolla"},
-                new Car{CarId = 4, CarBrandId = 2 , CarColorId = 8,CarModelYear =2011,DailyPrice = 450 ,CarDescription= "Toyota Yaris"},
-                new Car{CarId = 5, CarBrandId = 1 , CarColorId = 5,CarModelYear =2010,DailyPrice = 1200 ,CarDescription= "Volkswagen Passat"},
-                new Car{CarId = 6, CarBrandId = 1 , CarColorId = 2,CarModelYear =2012,DailyPrice = 1500 ,CarDescription= "Volkswagen Tiguan"}
+                new Car{Id = 1, BrandId = 4 , ColorId = 3,ModelYear =2000,DailyPrice = 500 ,Description= "Ford Focus"},
+                new Car{Id = 2, BrandId = 4 , ColorId = 5,ModelYear =2003,DailyPrice = 850 ,Description= "Ford Fiesta"},
+                new Car{Id = 3, BrandId = 2 , ColorId = 7,ModelYear =2002,DailyPrice = 730 ,Description= "Toyota Corolla"},
+                new Car{Id = 4, BrandId = 2 , ColorId = 8,ModelYear =2011,DailyPrice = 450 ,Description= "Toyota Yaris"},
+                new Car{Id = 5, BrandId = 1 , ColorId = 5,ModelYear =2010,DailyPrice = 1200 ,Description= "Volkswagen Passat"},
+                new Car{Id = 6, BrandId = 1 , ColorId = 2,ModelYear =2012,DailyPrice = 1500 ,Description= "Volkswagen Tiguan"}
             };
         }
 
         public void Add(Car car)
         {
             _cars.Add(car);
-            Console.WriteLine("BİLGİ: {0} siteye eklendi!", car.CarDescription);
+            Console.WriteLine("BİLGİ: {0} siteye eklendi!", car.Description);
         }
 
         public void Delete(Car car)
         {
-            var carToDelete = _cars.FirstOrDefault(c => c.CarId == car.CarId);
+            var carToDelete = _cars.FirstOrDefault(c => c.Id == car.Id);
             _cars.Remove(carToDelete);
-            Console.WriteLine("BİLGİ: {0} başarıyla kaldırıldı",car.CarDescription);
+            Console.WriteLine("BİLGİ: {0} başarıyla kaldırıldı",car.Description);
+        }
+
+        public Car Get(Expression<Func<Car, bool>> filter)
+        {
+            throw new NotImplementedException();
         }
 
         public List<Car> GetAll()
@@ -43,20 +49,21 @@ namespace DataAccess.Concrete.InMemory
             return _cars;
         }
 
-        public List<Car> GetByBrandId(int carBrandId)
+        public List<Car> GetAll(Expression<Func<Car, bool>> filter = null)
         {
-            return _cars.Where(c => c.CarBrandId == carBrandId).ToList();
+            throw new NotImplementedException();
         }
+
 
         public void Update(Car car)
         {
-            var carToUpdate = _cars.FirstOrDefault(c => c.CarId == car.CarId);
-            carToUpdate.CarId = car.CarId;
-            carToUpdate.CarBrandId = car.CarBrandId;
-            carToUpdate.CarColorId = car.CarColorId;
-            carToUpdate.CarModelYear = car.CarModelYear;
+            var carToUpdate = _cars.FirstOrDefault(c => c.Id == car.Id);
+            carToUpdate.Id = car.Id;
+            carToUpdate.BrandId = car.BrandId;
+            carToUpdate.ColorId = car.ColorId;
+            carToUpdate.ModelYear = car.ModelYear;
             carToUpdate.DailyPrice = car.DailyPrice;
-            carToUpdate.CarDescription = car.CarDescription;
+            carToUpdate.Description = car.Description;
 
         }
     }

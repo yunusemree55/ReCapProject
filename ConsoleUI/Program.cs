@@ -1,4 +1,5 @@
 ﻿using Business.Concrete;
+using DataAccess.Concrete.EntityFramework;
 using DataAccess.Concrete.InMemory;
 using Entities.Concrete;
 using System;
@@ -57,7 +58,7 @@ namespace ConsoleUI
             switch (option)
             {
                 case 1:
-                    foreach (var car in carManager.GetByBrandId(4))
+                    foreach (var car in carManager.GetCarByBrandId(4))
                     {
                         Console.WriteLine("<< Ford Modelleri >>");
                         Console.WriteLine("Araç Adı : {0}\nGünlük ücreti: {1} TL\n\n",car.CarDescription,car.DailyPrice);
@@ -65,14 +66,14 @@ namespace ConsoleUI
                     break;
                 case 2:
                     Console.WriteLine("<< Toyota Modelleri >>");
-                    foreach (var car in carManager.GetByBrandId(2))
+                    foreach (var car in carManager.GetCarByBrandId(2))
                     {
                         Console.WriteLine("Araç Adı : {0}\nGünlük ücreti: {1} TL\n\n", car.CarDescription, car.DailyPrice);
                     }
                     break;
                 case 3:
                     Console.WriteLine("<< Volkswagen Modelleri >>");
-                    foreach (var car in carManager.GetByBrandId(1))
+                    foreach (var car in carManager.GetCarByBrandId(1))
                     {
                         Console.WriteLine("Araç Adı : {0}\nGünlük ücreti: {1} TL\n\n", car.CarDescription, car.DailyPrice);
                     }
